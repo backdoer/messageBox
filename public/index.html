@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+		<title>Weather App</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<h1>Login Credentials</h1>
+		<input id="firstName" type="text">
+		<input id="lastName" type="text"><br>
+		<button id="getMessages" type="button">Get Messages</button>
+		<div id="messages">
+
+		</div>
+
+		<h1>New Message</h1>
+		<form id="newMessage">
+			Recipient First Name:
+			<input id="recipientFirst" type="text"><br>
+			Recipient Last Name:
+			<input id="recipientLast"><br>
+			Message:
+			<textarea id="messageBody" type="textarea"></textarea>
+			<br>
+			<button type="submit">Send Message</button>
+		</form>
+
+		<h1>Sent Messages</h1>
+		<div id="sentMessages">
+
+		</div>
+		
+	</body>
+</html>
+
