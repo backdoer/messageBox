@@ -47,7 +47,9 @@ router.post('/sendmessage', function(req, res, next) {
 		recipientFirst: req.body.recipientFirst,
 		recipientLast: req.body.recipientLast,
 		message: req.body.message,
-		read: false
+		read: false,
+		datetime: new Date().getTime(),
+
 	}
 
 	messages[recipientSlug]['inbox'][message_id_sequence] = message_data;
