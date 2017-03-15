@@ -1,6 +1,20 @@
-
-
 $(document).ready(function() {
+	
+	$('#login').click(function(e){
+		e.preventDefault();
+		
+		window.localStorage.firstname = $('#firstName').val();
+		window.localStorage.lastname = $('#lastName').val();		   						
+		
+		var data = {firstname: $('#firstName').val(),
+				lastname:  $('#lastName').val()		   						
+		}
+		
+		$.get('/messageBox', function(response) {
+			console.log(response);
+			$('body').html(response);
+		});
+	});
 
 	$('#newMessage').submit(function(e){
 		e.preventDefault();
@@ -8,8 +22,8 @@ $(document).ready(function() {
 		var data = {message: $('#messageBody').val(), 
 		recipientFirst: $('#recipientFirst').val(),
 		recipientLast: $('#recipientLast').val(),
-		userFirst: $('#firstName').val(),
-		userLast: $('#lastName').val()
+		userFirst: window.localStorage.firstname,
+		userLast: window.localStorage.lastname
 	}
 		$.post('http://localhost:3000/sendmessage', data, function(response) {
 		    console.log(response);
@@ -21,8 +35,8 @@ $(document).ready(function() {
 		$("#messages").empty();
 		$("#sentMessages").empty();
 		var data = {
-			userFirst: $('#firstName').val(),
-			userLast: $('#lastName').val()
+			userFirst: window.localStorage.firstname,
+			userLast: window.localStorage.lastname
 		}
 		$.getJSON('http://localhost:3000/getmessages', data, function(response) {
 
@@ -56,8 +70,8 @@ $(document).ready(function() {
 
 		e.preventDefault();
 		var data = {messageId: $(this).attr('messageid'), 
-			userFirst: $('#firstName').val(),
-			userLast: $('#lastName').val()
+			userFirst: window.localStorage.firstname,
+			userLast: window.localStorage.lastname
 		}
 		$.post('http://localhost:3000/deletemessage', data, function(response) {
 		    console.log(response);

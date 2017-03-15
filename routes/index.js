@@ -6,9 +6,14 @@ var request = require('request');
 var messages = {};
 var message_id_sequence = 0;
 
-/* GET home page. */
+/* GET home (login) page. */
 router.get('/', function(req, res, next) {
-	res.sendFile('index.html', { root:  'public' });
+  res.sendFile('login.html', { root:  'public' })
+});
+
+/* GET messaging page */
+router.get('/messageBox', function(req, res, next) {
+	res.redirect('messageBox.html');
 });
 
 function get_slug(val1, val2) {
