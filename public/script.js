@@ -99,24 +99,37 @@ $(document).ready(function() {
 
 	});
 
+	function validateMessage(){
+		if (!$('#messageBody').val() || !$('#recipientFirst').val() || !$('#recipientLast').val()){
+			return false;
+		}
+		return true;
+	}
+
 	$(document).on('submit', '#newMessage', function(e){
 		e.preventDefault();
+		if (validateMessage()){
 
-		var data = {message: $('#messageBody').val(), 
-		recipientFirst: $('#recipientFirst').val(),
-		recipientLast: $('#recipientLast').val(),
-		userFirst: window.localStorage.firstname,
-		userLast: window.localStorage.lastname
-	}
-		$.post('/sendmessage', data, function(response) {
-		    console.log(response);
-		}, 'json');
-		
-		$('#messageBody').val("");
-		$('#recipientFirst').val("");
-		$('#recipientLast').val("");
-		alert('Message Sent!');
-		refreshMessages();
+			var data = {message: $('#messageBody').val(), 
+				recipientFirst: $('#recipientFirst').val(),
+				recipientLast: $('#recipientLast').val(),
+				userFirst: window.localStorage.firstname,
+				userLast: window.localStorage.lastname
+			}
+			$.post('/sendmessage', data, function(response) {
+			    console.log(response);
+			}, 'json');
+			
+			$('#messageBody').val("");
+			$('#recipientFirst').val("");
+			$('#recipientLast').val("");
+			alert('Message Sent!');
+			refreshMessages();
+		}
+		else {
+			alert("Please fill out the entire form");
+		}
+
 	});
 
 	$(document).on('click', '#getMessages', function(e){
