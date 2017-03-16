@@ -59,12 +59,14 @@ $(document).ready(function() {
 		    		'<h3> Message</h3>' + 
 		    		'<p>Recipient: ' + message.recipientFirst + ' ' + message.recipientLast + '</p>' + 
 		    		'<p>Message: ' + message.message + '</p>'			    		
-		    		);
+		    	);
 		    });
 
 
 		}, 'json');			
 	});
+	
+
 
 	$(document).on('click', '.deletemessage', function(e){
 
