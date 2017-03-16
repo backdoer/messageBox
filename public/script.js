@@ -59,7 +59,7 @@ $(document).ready(function() {
 		    	var message = response['outbox'][key];
 		    	var body = '<p><u>Message</u><br>' + message.message + '</p>';
 
-		    	var title = 'To: ' + message.senderFirst + ' ' + message.senderLast + ' &nbsp;&nbsp;' + 'Read: ' + message.read + 
+		    	var title = 'To: ' + message.recipientFirst + ' ' + message.recipientLast + ' &nbsp;&nbsp;' + 'Read: ' + message.read + 
 		    	'<br>Date: ' + message.datetime;
 		    	$("#sentmessages").append(getAccPanel(message, i, 'sentmessages', body, title));
 		    });
