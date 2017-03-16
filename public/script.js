@@ -115,6 +115,7 @@ $(document).ready(function() {
 		$('#messageBody').val("");
 		$('#recipientFirst').val("");
 		$('#recipientLast').val("");
+		alert('Message Sent!');
 		refreshMessages();
 	});
 
