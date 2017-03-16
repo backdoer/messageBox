@@ -45,19 +45,22 @@ $(document).ready(function() {
 		    Object.keys(response['inbox']).reverse().forEach(function(key, i){
 		    	var message = response['inbox'][key];
 
-		    	var body = '<p>Message: ' + message.message + '</p>' +
+		    	var body = '<p><u>Message</u><br> ' + message.message + '</p>' +
+		    	 
 		    	'<a href="#" class="deletemessage" messageid="' + message.messageId + '">Delete Message</a>';
 
-		    	var title = 'From: ' + message.senderFirst + ' ' + message.senderLast
+		    	var title = 'From: ' + message.senderFirst + ' ' + message.senderLast +
+		    	'<br>Date: ' + message.datetime;
 
 		    	$("#messages").append(getAccPanel(message, i, 'messages', body, title));
 		    });
 
 		    Object.keys(response['outbox']).reverse().forEach(function(key, i){
 		    	var message = response['outbox'][key];
-		    	var body = '<p>Message: ' + message.message + '</p>';
+		    	var body = '<p><u>Message</u><br>' + message.message + '</p>';
 
-		    	var title = 'To: ' + message.senderFirst + ' ' + message.senderLast + ' &nbsp;&nbsp;' + 'Read: ' + message.read;
+		    	var title = 'To: ' + message.senderFirst + ' ' + message.senderLast + ' &nbsp;&nbsp;' + 'Read: ' + message.read + 
+		    	'<br>Date: ' + message.datetime;
 		    	$("#sentmessages").append(getAccPanel(message, i, 'sentmessages', body, title));
 		    });
 
