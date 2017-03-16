@@ -1,24 +1,28 @@
 
-<div id="newMessageBlock">
-    <h1>New Message</h1>
-    <form id="newMessage">
-    	Recipient First Name:
-    	<input id="recipientFirst" type="text"><br>
-    	Recipient Last Name:
-    	<input id="recipientLast"><br>
-    	Message:
-    	<textarea id="messageBody" type="textarea"></textarea>
-    	<br>
-    	<button type="submit">Send Message</button>
-    </form>
+<div class='flex-container'>
+    <div class="main-box">
+        <h1>New Message</h1>
+        <form id="newMessage">
+        	Recipient First Name<br>
+        	<input id="recipientFirst" type="text"><br>
+        	Recipient Last Name<br>
+        	<input id="recipientLast" tyle="text" class="style-1"><br>
+        	Message<br>
+        	<textarea id="messageBody" type="textarea"></textarea>
+        	<br>
+        	<button type="submit">Send Message</button>
+        </form>
+    </div>
 </div>
-<div id="messagesBlock">
-    <h1>Inbox</h1>
-    <button id="getMessages" type="button">Get Messages</button>
-    <div id="messages"></div>
-</div>
-<div id="sentMessagesBlock">
-    <h1>Sent Messages</h1>
-    <button id="getSentMessages" type="button">Get Messages</button>
-    <div id="sentMessages"></div>
+<div class='flex-container'>
+    <div class="bottom-box">
+        <h1>Inbox</h1>
+        <button id="getMessages" type="button">Get Messages</button>
+        <div id="messages"></div>
+    </div>
+    <div class="bottom-box">
+        <h1>Sent Messages</h1>
+        <button id="getSentMessages" type="button">Get Messages</button>
+        <div id="sentMessages"></div>
+    </div>
 </div>
