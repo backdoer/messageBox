@@ -8,7 +8,7 @@ var message_id_sequence = 0;
 
 /* GET home (login) page. */
 router.get('/', function(req, res, next) {
-  res.sendFile('app.html', { root:  'public' })
+	res.sendFile('app.html', { root:  'public' })
 });
 
 router.get('/login', function(req, res, next) {
@@ -27,12 +27,12 @@ function get_slug(val1, val2) {
 router.get('/getmessages', function(req, res, next) {
 	var slug = get_slug(req.query.userFirst, req.query.userLast);
 	if (messages[slug]) {	
-	Object.keys(messages[slug]['inbox']).forEach(function(key){
-		messages[slug]['inbox'][key].read = 'Yes';
-	});
+		Object.keys(messages[slug]['inbox']).forEach(function(key){
+			messages[slug]['inbox'][key].read = 'Yes';
+		});
 	}
 
-        res.status(200).json(messages[slug]);
+	res.status(200).json(messages[slug]);
 });
 
 router.post('/sendmessage', function(req, res, next) {
@@ -41,20 +41,28 @@ router.post('/sendmessage', function(req, res, next) {
 	var senderSlug = get_slug(req.body.userFirst, req.body.userLast);
 
 	if (!messages[recipientSlug]){
-	
+
 		messages[recipientSlug] = {};
 		messages[recipientSlug]['inbox'] = {};
 		messages[recipientSlug]['outbox'] = [];
 	}	
 
 	if (!messages[senderSlug]) {
-		
+
 		messages[senderSlug] = {};
 		messages[senderSlug]['inbox'] = {};
 		messages[senderSlug]['outbox'] = [];
 	}
 
 	message_id_sequence++;
+	var currentdate = new Date(); 
+	var datetime = currentdate.getDate() + "/"
+		+ (currentdate.getMonth()+1)  + "/" 
+		+ currentdate.getFullYear() + " @ "  
+		+ currentdate.getHours() + ":"  
+		+ currentdate.getMinutes() + ":" 
+		+ currentdate.getSeconds();
+
 	var message_data = {
 		messageId: message_id_sequence,
 		senderFirst: req.body.userFirst,
@@ -63,7 +71,7 @@ router.post('/sendmessage', function(req, res, next) {
 		recipientLast: req.body.recipientLast,
 		message: req.body.message,
 		read: "No",
-		datetime: new Date().getTime(),
+		datetime: datetime,
 
 	}
 
