@@ -2,13 +2,74 @@ $(document).ready(function() {
 
 	function renderPage(page){
 		$.get(page, function(response) {
-			$('body').html(response);
+			$('#app').html(response);
 		});
+	}
+
+	function showNav(){
+		$('#name').text(window.localStorage.firstname);
+		$('#mainnav').show();
+	}
+
+	function hideNav(){
+		$('#mainnav').hide();
+	}
+
+	function getAccPanel(message, i, parent, body, title){
+
+	    	return  '<div class="panel panel-default">' +
+               '<div class="panel-heading" role="tab" id="heading' + i +'">' +
+                  '<h4 class="panel-title">'+
+                    '<a class="collapsed" role="button" data-toggle="collapse" data-parent="#' + parent + '" href="#collapse' +parent + i +'" aria-expanded="false" aria-controls="collapse' + parent +i +'">' +
+                      title +
+                    '</a>' +
+                  '</h4>' +
+                '</div>' +
+                '<div id="collapse' + parent +i +'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + parent + i +'">' +
+                  '<div class="panel-body">' +
+ 						body + 
+                  '</div>' +
+                '</div>' +
+              '</div>';
+	}
+
+	function refreshMessages() {
+		$("#messages").empty();
+		$("#sentMessages").empty();
+		var data = {
+			userFirst: window.localStorage.firstname,
+			userLast: window.localStorage.lastname
+		}
+		$.getJSON('http://localhost:3000/getmessages', data, function(response) {
+
+		    Object.keys(response['inbox']).reverse().forEach(function(key, i){
+		    	var message = response['inbox'][key];
+
+		    	var body = '<p>Message: ' + message.message + '</p>' +
+		    	'<a href="#" class="deletemessage" messageid="' + message.messageId + '">Delete Message</a>';
+
+		    	var title = 'From: ' + message.senderFirst + ' ' + message.senderLast
+
+		    	$("#messages").append(getAccPanel(message, i, 'messages', body, title));
+		    });
+
+		    Object.keys(response['outbox']).reverse().forEach(function(key, i){
+		    	var message = response['outbox'][key];
+		    	var body = '<p>Message: ' + message.message + '</p>';
+
+		    	var title = 'To: ' + message.senderFirst + ' ' + message.senderLast + ' &nbsp;&nbsp;' + 'Read: ' + message.read;
+		    	$("#sentmessages").append(getAccPanel(message, i, 'sentmessages', body, title));
+		    });
+
+
+		}, 'json');
 	}
 
 	// Pick the right page to render!
 	if (window.localStorage.firstname && window.localStorage.lastname){
 		renderPage('/messageBox');
+		showNav();
+		setTimeout(refreshMessages, 300);
 	}
 	else {
 		renderPage('/login')
@@ -27,8 +88,10 @@ $(document).ready(function() {
 			var data = {firstname: $('#firstName').val(),
 					lastname:  $('#lastName').val()		   						
 			}
-	
+			
 			renderPage('/messageBox')
+			showNav();
+			setTimeout(refreshMessages, 300);
 		}
 
 	});
@@ -49,42 +112,13 @@ $(document).ready(function() {
 		$('#messageBody').val("");
 		$('#recipientFirst').val("");
 		$('#recipientLast').val("");
+		refreshMessages();
 	});
 
 	$(document).on('click', '#getMessages', function(e){
 		e.preventDefault();
-		$("#messages").empty();
-		$("#sentMessages").empty();
-		var data = {
-			userFirst: window.localStorage.firstname,
-			userLast: window.localStorage.lastname
-		}
-		$.getJSON('http://localhost:3000/getmessages', data, function(response) {
-
-		    console.log(response);
-		    Object.keys(response['inbox']).forEach(function(key){
-		    	var message = response['inbox'][key];
-		    	console.log(message);
-		    	$("#messages").append(
-		    		'<h3> Message</h3>' + 
-		    		'<p>Sender: ' + message.senderFirst + ' ' + message.senderLast + '</p>' + 
-		    		'<p>Message: ' + message.message + '</p>' + 
-		    		'<a href="#" class="deletemessage" messageid="' + message.messageId + '">Delete Message</a>'			    		
-		    		);
-		    });
-
-		    Object.keys(response['outbox']).forEach(function(key){
-		    	var message = response['outbox'][key];
-		    	console.log(message);
-		    	$("#sentMessages").append(
-		    		'<h3> Message</h3>' + 
-		    		'<p>Recipient: ' + message.recipientFirst + ' ' + message.recipientLast + '</p>' + 
-		    		'<p>Message: ' + message.message + '</p>'			    		
-		    	);
-		    });
-
-
-		}, 'json');			
+		refreshMessages();
+			
 	});
 	
 	$(document).on('click', '#logout', function(e){

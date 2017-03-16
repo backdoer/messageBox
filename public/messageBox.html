@@ -1,4 +1,5 @@
 
+
 <div class='flex-container'>
     <div class="main-box">
         <h1>New Message</h1>
@@ -15,17 +16,21 @@
     </div>
 </div>
         <button id="getMessages" type="button">Refresh Messages</button>
-        <button id="logout" type="button">Logout</button>
 <div class='flex-container'>
     <div class="bottom-box">
         <h1>Inbox</h1>
 
-        <div id="messages"></div>
+            <div class="panel-group" id="messages" role="tablist" aria-multiselectable="true">
+
+            </div>
+
     </div>
-</div>
-<div class='flex-container'>
+
     <div class="bottom-box">
         <h1>Sent Messages</h1>
-        <div id="sentMessages"></div>
+            <div class="panel-group" id="sentmessages" role="tablist" aria-multiselectable="true">
+
+            </div>
+
     </div>
 </div>

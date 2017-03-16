@@ -25,8 +25,14 @@ function get_slug(val1, val2) {
 }
 
 router.get('/getmessages', function(req, res, next) {
-	console.log(messages);
-        res.status(200).json(messages[get_slug(req.query.userFirst, req.query.userLast)]);
+	var slug = get_slug(req.query.userFirst, req.query.userLast);
+	if (messages[slug]) {	
+	Object.keys(messages[slug]['inbox']).forEach(function(key){
+		messages[slug]['inbox'][key].read = 'Yes';
+	});
+	}
+
+        res.status(200).json(messages[slug]);
 });
 
 router.post('/sendmessage', function(req, res, next) {
@@ -56,7 +62,7 @@ router.post('/sendmessage', function(req, res, next) {
 		recipientFirst: req.body.recipientFirst,
 		recipientLast: req.body.recipientLast,
 		message: req.body.message,
-		read: false,
+		read: "No",
 		datetime: new Date().getTime(),
 
 	}
