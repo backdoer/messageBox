@@ -8,12 +8,16 @@ var message_id_sequence = 0;
 
 /* GET home (login) page. */
 router.get('/', function(req, res, next) {
-  res.sendFile('login.html', { root:  'public' })
+  res.sendFile('app.html', { root:  'public' })
+});
+
+router.get('/login', function(req, res, next) {
+	res.sendFile('login.html', {root: 'public'});
 });
 
 /* GET messaging page */
 router.get('/messageBox', function(req, res, next) {
-	res.redirect('messageBox.html');
+	res.sendFile('messageBox.html', {root: 'public'});
 });
 
 function get_slug(val1, val2) {

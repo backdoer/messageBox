@@ -1,6 +1,22 @@
 $(document).ready(function() {
+
+	function renderPage(page){
+		$.get(page, function(response) {
+			$('body').html(response);
+		});
+	}
+
+	// Pick the right page to render!
+	if (window.localStorage.firstname && window.localStorage.lastname){
+		console.log("yo yo yo")
+		renderPage('/messageBox');
+	}
+	else {
+		console.log('hah');
+		renderPage('/login')
+	}
 	
-	$('#login').click(function(e){
+	$(document).on('click', '#login', function(e){
 		e.preventDefault();
 		
 		window.localStorage.firstname = $('#firstName').val();
@@ -9,14 +25,11 @@ $(document).ready(function() {
 		var data = {firstname: $('#firstName').val(),
 				lastname:  $('#lastName').val()		   						
 		}
-		
-		$.get('/messageBox', function(response) {
-			console.log(response);
-			$('body').html(response);
-		});
+	
+		renderPage('/messageBox')
 	});
 
-	$('#newMessage').submit(function(e){
+	$(document).on('submit', '#newMessage', function(e){
 		e.preventDefault();
 
 		var data = {message: $('#messageBody').val(), 
@@ -30,7 +43,7 @@ $(document).ready(function() {
 		}, 'json');
 	});
 
-	$('#getMessages').click(function(e){
+	$(document).on('click', '#getMessages', function(e){
 		e.preventDefault();
 		$("#messages").empty();
 		$("#sentMessages").empty();

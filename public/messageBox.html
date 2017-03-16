@@ -1,37 +1,24 @@
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-		<title>Weather App</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="script.js"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-	<body>
-        <div id="newMessageBlock">
-            <h1>New Message</h1>
-            <form id="newMessage">
-            	Recipient First Name:
-            	<input id="recipientFirst" type="text"><br>
-            	Recipient Last Name:
-            	<input id="recipientLast"><br>
-            	Message:
-            	<textarea id="messageBody" type="textarea"></textarea>
-            	<br>
-            	<button type="submit">Send Message</button>
-            </form>
-        </div>
-        <div id="messagesBlock">
-            <h1>Inbox</h1>
-            <button id="getMessages" type="button">Get Messages</button>
-            <div id="messages"></div>
-        </div>
-        <div id="sentMessagesBlock">
-            <h1>Sent Messages</h1>
-            <button id="getSentMessages" type="button">Get Messages</button>
-            <div id="sentMessages"></div>
-        </div>
-	</body>
-</html>
+<div id="newMessageBlock">
+    <h1>New Message</h1>
+    <form id="newMessage">
+    	Recipient First Name:
+    	<input id="recipientFirst" type="text"><br>
+    	Recipient Last Name:
+    	<input id="recipientLast"><br>
+    	Message:
+    	<textarea id="messageBody" type="textarea"></textarea>
+    	<br>
+    	<button type="submit">Send Message</button>
+    </form>
+</div>
+<div id="messagesBlock">
+    <h1>Inbox</h1>
+    <button id="getMessages" type="button">Get Messages</button>
+    <div id="messages"></div>
+</div>
+<div id="sentMessagesBlock">
+    <h1>Sent Messages</h1>
+    <button id="getSentMessages" type="button">Get Messages</button>
+    <div id="sentMessages"></div>
+</div>
