@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 	function refreshMessages() {
 		$("#messages").empty();
-		$("#sentMessages").empty();
+		$("#sentmessages").empty();
 		var data = {
 			userFirst: window.localStorage.firstname,
 			userLast: window.localStorage.lastname
