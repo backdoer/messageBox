@@ -40,7 +40,7 @@ $(document).ready(function() {
 			userFirst: window.localStorage.firstname,
 			userLast: window.localStorage.lastname
 		}
-		$.getJSON('http://localhost:3000/getmessages', data, function(response) {
+		$.getJSON('/getmessages', data, function(response) {
 
 		    Object.keys(response['inbox']).reverse().forEach(function(key, i){
 		    	var message = response['inbox'][key];
@@ -108,7 +108,7 @@ $(document).ready(function() {
 		userFirst: window.localStorage.firstname,
 		userLast: window.localStorage.lastname
 	}
-		$.post('http://localhost:3000/sendmessage', data, function(response) {
+		$.post('/sendmessage', data, function(response) {
 		    console.log(response);
 		}, 'json');
 		
@@ -139,7 +139,7 @@ $(document).ready(function() {
 			userFirst: window.localStorage.firstname,
 			userLast: window.localStorage.lastname
 		}
-		$.post('http://localhost:3000/deletemessage', data, function(response) {
+		$.post('/deletemessage', data, function(response) {
 		    console.log(response);
 		}, 'json');
 		$('#getMessages').click();
