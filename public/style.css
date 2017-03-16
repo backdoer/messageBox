@@ -9,10 +9,10 @@
 .main-box {
     -webkit-flex: 2;
     flex: 2;
-    /*text-align: center;*/
+
 }
 .bottom-box {
-    width: 50%;
+    width: 40%;
     height: auto;
 
 }
