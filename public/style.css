@@ -13,7 +13,12 @@
 }
 .bottom-box {
     width: 50%;
+    height: auto;
 
+}
+
+h1 {
+    text-decoration: underline;
 }
 
 .main-box, .bottom-box, .main-box {
@@ -47,4 +52,8 @@ button {
     color: white;
     padding: 5px;
     border-radius: 3px;
+}
+
+#getMessages {
+    margin-left: 20px;
 }
