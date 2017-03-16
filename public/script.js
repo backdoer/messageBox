@@ -17,14 +17,20 @@ $(document).ready(function() {
 	$(document).on('click', '#login', function(e){
 		e.preventDefault();
 		
-		window.localStorage.firstname = $('#firstName').val();
-		window.localStorage.lastname = $('#lastName').val();		   						
-		
-		var data = {firstname: $('#firstName').val(),
-				lastname:  $('#lastName').val()		   						
+		if(($('#firstName').val() == "") || ($('#lastName').val() == "")){
+			window.alert("enter a first and last name");	
 		}
+		else {
+			window.localStorage.firstname = $('#firstName').val();
+			window.localStorage.lastname = $('#lastName').val();		   						
+		
+			var data = {firstname: $('#firstName').val(),
+					lastname:  $('#lastName').val()		   						
+			}
 	
-		renderPage('/messageBox')
+			renderPage('/messageBox')
+		}
+
 	});
 
 	$(document).on('submit', '#newMessage', function(e){
@@ -39,6 +45,10 @@ $(document).ready(function() {
 		$.post('http://localhost:3000/sendmessage', data, function(response) {
 		    console.log(response);
 		}, 'json');
+		
+		$('#messageBody').val("");
+		$('#recipientFirst').val("");
+		$('#recipientLast').val("");
 	});
 
 	$(document).on('click', '#getMessages', function(e){
@@ -77,7 +87,12 @@ $(document).ready(function() {
 		}, 'json');			
 	});
 	
+	$(document).on('click', '#logout', function(e){
+		e.preventDefault();
 
+		window.localStorage.clear();
+		location.reload();
+	});
 
 	$(document).on('click', '.deletemessage', function(e){
 
