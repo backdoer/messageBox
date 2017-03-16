@@ -8,11 +8,9 @@ $(document).ready(function() {
 
 	// Pick the right page to render!
 	if (window.localStorage.firstname && window.localStorage.lastname){
-		console.log("yo yo yo")
 		renderPage('/messageBox');
 	}
 	else {
-		console.log('hah');
 		renderPage('/login')
 	}
 	
